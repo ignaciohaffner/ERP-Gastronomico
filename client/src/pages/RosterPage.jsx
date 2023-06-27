@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useUsers } from '../context/UserContext'
 import UserTable from '../components/UserTable'
-import { Table, Modal, Card, Button } from '@rewind-ui/core';
+import { Table } from '@rewind-ui/core';
 
 
 const RosterPage = () => {

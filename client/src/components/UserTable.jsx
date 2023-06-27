@@ -50,7 +50,7 @@ const UserTable = ({ user }) => {
                             <Dropdown.Item>Edit</Dropdown.Item>
                             <Dropdown.Divider />
                             {
-                                (role === 'manager' ? <Dropdown.Item onClick={() => setOpen(true)}>Dar rango</Dropdown.Item> : null)
+                                (role === 'manager' ? <Dropdown.Item onClick={() => setOpen(true)}>Dar rango</Dropdown.Item> : <Dropdown.Item>Dar rango</Dropdown.Item>)
                             }
                             <Dropdown.Item color="red" className='bg-red-500 text-white' onClick={
                                 () => deleteUser(user._id)

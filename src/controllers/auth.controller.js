@@ -6,7 +6,7 @@ import { TOKEN_SECRET } from '../config.js'
 
 
 export const register = async (req, res) => {
-    const { email, password, username, role } = req.body
+    const { email, password, username, role, rank, dateAdmission } = req.body
 
     try {
 
@@ -19,19 +19,19 @@ export const register = async (req, res) => {
             username,
             email,
             password: passwordHash,
-            role
+            role,
+            rank,
+            dateAdmission
         })
         const userSaved = await newUser.save();
 
         const token = await createAccessToken({ id: newUser._id, role: newUser.role })
         console.log(token)
-
-        res.cookie("token", token)
-
         res.json({
             id: userSaved._id,
             username: userSaved.username,
             email: userSaved.email,
+            rank: userSaved.rank,
             createdAt: newUser.createdAt,
             updatedAt: newUser.updatedAt
         })

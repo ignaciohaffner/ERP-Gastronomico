@@ -13,6 +13,7 @@ import Navbar from './components/Navbar.jsx'
 import RosterPage from './pages/RosterPage.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import ProtectedManagerRoutes from './ProtectedManagerRoutes.jsx'
+import ManagerPage from './pages/ManagerPage.jsx'
 
 function App() {
   return (
@@ -26,7 +27,6 @@ function App() {
                 <Routes>
                   <Route path='/' element={<HomePage />} />
                   <Route path='/login' element={<LoginPage />} />
-                  <Route path='/register' element={<RegisterPage></RegisterPage>} />
 
                   <Route element={<ProtectedRoute />}>
                     <Route path='/tasks' element={<TasksPage></TasksPage>} />
@@ -36,6 +36,8 @@ function App() {
                     <Route path='/profile/:id' element={<ProfilePage></ProfilePage>} />
                     <Route element={<ProtectedManagerRoutes />}>
                       <Route path='/roster' element={<RosterPage></RosterPage>} />
+                      <Route path='/manager' element={<ManagerPage></ManagerPage>} />
+                      <Route path='/register' element={<RegisterPage></RegisterPage>} />
                     </Route>
                   </Route>
                 </Routes>

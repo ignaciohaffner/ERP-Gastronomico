@@ -19,8 +19,10 @@ const RosterPage = () => {
                 <Table.Thead>
                     <Table.Tr>
                         <Table.Th align="left">Username</Table.Th>
-                        <Table.Th align="left">Email</Table.Th>
                         <Table.Th align="left">Rango</Table.Th>
+                        <Table.Th align="left">Equipo</Table.Th>
+                        <Table.Th align="left">Variable</Table.Th>
+                        <Table.Th align="left">Fecha de ingreso</Table.Th>
                         <Table.Th align="left">Estado</Table.Th>
                         <Table.Th align="right">Actions</Table.Th>
                     </Table.Tr>

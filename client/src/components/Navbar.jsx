@@ -17,13 +17,7 @@ const Navbar = () => {
             <ul className=' flex gap-x-2 '>
                 {isAuthenticated ? (
                     <>
-                        <li className=''>
-                            <Button color="white" tone="outline" shadow="base">
-                                <Link to='/add-task'
-                                    className=''
-                                >CRUD</Link>
-                            </Button>
-                        </li>
+
                         {
                             user.role === 'manager' ? (
                                 <li className=''>
@@ -31,6 +25,18 @@ const Navbar = () => {
                                         <Link to='/roster'
                                             className=''
                                         >Roster</Link>
+                                    </Button>
+
+                                </li>
+                            ) : null
+                        }
+                        {
+                            user.role === 'manager' ? (
+                                <li className=''>
+                                    <Button color="white" tone="outline" shadow="base">
+                                        <Link to='/manager'
+                                            className=''
+                                        >Manager</Link>
                                     </Button>
 
                                 </li>

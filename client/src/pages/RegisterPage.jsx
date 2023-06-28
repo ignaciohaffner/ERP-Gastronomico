@@ -1,24 +1,23 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import { useAuth } from '../context/AuthContext'
-import { useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { Combobox } from '@rewind-ui/core'
 
 const RegisterPage = () => {
 
-    const { register, handleSubmit, formState: { errors } } = useForm()
-    const { signup, isAuthenticated, errors: registerErrors } = useAuth()
+    const { register, handleSubmit, setValue, formState: { errors } } = useForm()
+    const { signup, errors: registerErrors } = useAuth()
     const navigate = useNavigate()
 
-
-    useEffect(() => {
-        if (isAuthenticated) navigate("/tasks")
-    }, [isAuthenticated]);
     const onSubmit =
         handleSubmit(async (values) => {
             signup(values)
         })
+
+    const handleComboboxChange = (selectedValue) => {
+        setValue('rank', selectedValue); // Establece el valor seleccionado en el registro 'rank'
+    };
 
 
 
@@ -26,13 +25,13 @@ const RegisterPage = () => {
         <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
             <div className='bg-zinc-800 max-w-md p-10 rounded-md '>
                 <h1 className=' text-3xl font-bold'>Register</h1>
-                {
+                {/* {
                     registerErrors.map((error, i) => (
                         <div key={i} className='bg-red-500 p-2 text-white '>
                             {error}
                         </div>
                     ))
-                }
+                } */}
                 <form onSubmit={onSubmit}>
                     <input type="text" {
                         ...register('username', { required: true })
@@ -54,7 +53,8 @@ const RegisterPage = () => {
                     }
                     <Combobox {
                         ...register('rank', { required: true })
-                    } className='bg-zinc-700 text-white my-2 px-4 py-2 rounded-md' placeholder="Selecciona el rango">
+                    } className='bg-zinc-700 text-white my-2 px-4 py-2 rounded-md' placeholder="Selecciona el rango"
+                        onChange={handleComboboxChange}>
                         <Combobox.Option value="Support" label="Support" />
                         <Combobox.Option value="Senior Support" label="Senior Support" />
                         <Combobox.Option value="Trial Admin" label="Trial Admin" />
@@ -64,6 +64,9 @@ const RegisterPage = () => {
                         <Combobox.Option value="Lead Admin" label="Lead Admin" />
                         <Combobox.Option value="Manager" label="Manager" />
                     </Combobox>
+                    <input type="date" {
+                        ...register('dateAdmission', { required: true })
+                    } className="w-full bg-zinc-700 text-white my-2 px-4 py-2 rounded-md" />
                     <input type="password" {
                         ...register('password', { required: true })
                     } placeholder="Password" className="w-full bg-zinc-700 text-white my-2 px-4 py-2 rounded-md" />
@@ -72,6 +75,7 @@ const RegisterPage = () => {
                             <p className='text-red-500'>Password is required</p>
                         )
                     }
+
                     <button type='submit' className=' bg-sky-500 text-white px-4 py-2 rounded-md my-2 '>
                         Register
                     </button>

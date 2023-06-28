@@ -79,32 +79,33 @@ const ProfilePage = () => {
                         <h1 className='text-3xl text-center textbold mt-4'>LEGAJO ADMINISTRATIVO</h1>
                         <div className='flex justify-center my-10'>
                             <div className='text-xl mx-10 '>
-                                <p>{user.username} <span><Dropdown>
-                                    <Dropdown.Trigger>
-                                        <Button>
-                                            Menu
-                                        </Button>
-                                    </Dropdown.Trigger>
-                                    <Dropdown.Content>
-                                        <Dropdown.Item>
-                                            <button onClick={() => {
-                                                setUpdate(false)
-                                                setOpen(true)
-                                            }}>Agregar Historial Admin</button>
-                                        </Dropdown.Item>
-                                        <Dropdown.Item>
-                                            Messages
-                                        </Dropdown.Item>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                                </span>
-                                </p>
+                                <div className='flex justify-between'>
+                                    <p>{user.username}</p>
+                                    <Dropdown>
+                                        <Dropdown.Trigger>
+                                            <button className='bg-gray-200 text-black rounded-full'><BiChevronDown /></button>
+                                        </Dropdown.Trigger>
+                                        <Dropdown.Content>
+                                            <Dropdown.Item>
+                                                <button onClick={() => {
+                                                    setUpdate(false)
+                                                    setOpen(true)
+                                                }}>Agregar Historial Admin</button>
+                                            </Dropdown.Item>
+                                            <Dropdown.Item>
+                                                Messages
+                                            </Dropdown.Item>
+                                        </Dropdown.Content>
+                                    </Dropdown>
+                                </div>
+
                                 <p>{user.role}</p>
                                 <p>Faction Management, Staff Management</p>
                             </div>
                             <div className='text-xl mx-10'>
                                 <p>Fecha de ingreso: {days(user.createAt).utc().format('DD/MM/YYYY')}</p>
                                 <p>Tiempo en el rango: 45 Dias</p>
+                                <p>Strikes: 0/3</p>
                             </div>
                         </div>
                         <div className='m-5'>

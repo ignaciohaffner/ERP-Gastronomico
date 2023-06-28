@@ -3,6 +3,9 @@ import { Table, Card, Button, Dropdown, Badge, Modal, Selector } from '@rewind-u
 import { useUsers } from '../context/userContext'
 import { useAuth } from '../context/authContext'
 import { Link } from 'react-router-dom'
+import days from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+days.extend(utc)
 
 const UserTable = ({ user }) => {
 
@@ -18,12 +21,18 @@ const UserTable = ({ user }) => {
                     <Link to={`/profile/${user._id}`}>{user.username}</Link>
                 </Table.Td>
                 <Table.Td>
-                    {user.email}
+                    {user.rank}
+                </Table.Td>
+                <Table.Td>
+                    FM
                 </Table.Td>
                 <Table.Td>
                     <Badge color="purple" tone="light">
                         {(user.role) === 'staff' ? 'Staff' : (user.role) === 'manager' ? 'Manager' : 'Staff Management'}
                     </Badge>
+                </Table.Td>
+                <Table.Td>
+                    {days(user.dateAdmission).utc().format('DD/MM/YYYY')}
                 </Table.Td>
                 <Table.Td>
                     <Badge color="green" tone="outline" className='p-2'>

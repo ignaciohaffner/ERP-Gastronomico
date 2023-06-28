@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table, Card, Button, Dropdown, Badge, Modal, Selector } from '@rewind-ui/core'
+import { Table, Card, Button, Dropdown, Badge, Modal, Selector, Checkbox } from '@rewind-ui/core'
 import { useUsers } from '../context/userContext'
 import { useAuth } from '../context/authContext'
 import { Link } from 'react-router-dom'
@@ -12,7 +12,29 @@ const UserTable = ({ user }) => {
     const { deleteUser, updateUser } = useUsers()
     const { role } = useAuth()
     const [open, setOpen] = useState(false);
+    const [openTeam, setOpenTeam] = useState(false)
 
+
+    // CAMBIAR RANGO // 
+
+    const [selectedValues, setSelectedValues] = useState([]);
+
+    const handleCheckboxChange = (event) => {
+        const { value, checked } = event.target;
+
+        if (checked) {
+            setSelectedValues([...selectedValues, value]);
+        } else {
+            setSelectedValues(selectedValues.filter((selectedValue) => selectedValue !== value));
+        }
+    };
+
+    const handleAddToDatabase = () => {
+        updateUser(user._id, { team: selectedValues })
+        console.log(selectedValues);
+    };
+
+    // TERMINA CAMBIAR RANGO // 
 
     return (
         <>
@@ -24,7 +46,11 @@ const UserTable = ({ user }) => {
                     {user.rank}
                 </Table.Td>
                 <Table.Td>
-                    FM
+                    <div className="flex flex-col">
+                        {(user.team).map((team, index) => (
+                            <span key={index} className="team-item">— {team}</span>
+                        ))}
+                    </div>
                 </Table.Td>
                 <Table.Td>
                     <Badge color="purple" tone="light">
@@ -61,6 +87,9 @@ const UserTable = ({ user }) => {
                             {
                                 (role === 'manager' ? <Dropdown.Item onClick={() => setOpen(true)}>Dar rango</Dropdown.Item> : <Dropdown.Item>Dar rango</Dropdown.Item>)
                             }
+                            {
+                                (role === 'manager' ? <Dropdown.Item onClick={() => setOpenTeam(true)}>Dar equipo</Dropdown.Item> : <Dropdown.Item>Dar rango</Dropdown.Item>)
+                            }
                             <Dropdown.Item color="red" className='bg-red-500 text-white' onClick={
                                 () => deleteUser(user._id)
                             }>Delete</Dropdown.Item>
@@ -77,6 +106,32 @@ const UserTable = ({ user }) => {
                         <Selector.Tab onClick={() => updateUser(user._id, { role: "staffmanagement" })} anchor="staffmanagement" label="Staff Management" />
                         <Selector.Tab onClick={() => updateUser(user._id, { role: "manager" })} anchor="manager" label="Manager" />
                     </Selector>
+                </Card>
+            </Modal>
+            <Modal size="md" open={openTeam} onClose={() => setOpenTeam(false)}>
+                <Card className='text-black p-5 '>
+                    <h1 className=' text-2xl textbold my-5
+                    '>Seleccionar grupo para <span className='text-red-500'>{user.username}</span></h1>
+                    <div>
+                        <Checkbox label="Illegal Faction Management"
+                            value="Illegal Faction Management"
+                            onChange={handleCheckboxChange} />
+
+                        <Checkbox label="Legal Faction Management"
+                            value="Legal Faction Management"
+                            onChange={handleCheckboxChange} />
+                        <Checkbox label="Property Management"
+                            value="Property Management"
+                            onChange={handleCheckboxChange} />
+                        <Checkbox label="Staff Management"
+                            value="Staff Management"
+                            onChange={handleCheckboxChange} />
+                        <Checkbox label="Forum Management"
+                            value="Forum Management"
+                            onChange={handleCheckboxChange} />
+                        <Checkbox label="Unchecked" />
+                    </div>
+                    <button onClick={handleAddToDatabase}>Agregar</button>
                 </Card>
             </Modal>
         </>

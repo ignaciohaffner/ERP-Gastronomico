@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { array } from "zod";
 
 const userSchema = new mongoose.Schema(
     {
@@ -27,6 +28,9 @@ const userSchema = new mongoose.Schema(
         rank: {
             type: String,
             required: true,
+        },
+        team: {
+            type: [String],
         }
 
     }, {

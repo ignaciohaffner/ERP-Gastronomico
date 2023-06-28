@@ -4,7 +4,7 @@ import { useUsers } from '../context/UserContext'
 import { Accordion, Dropdown, Button, Modal, Card, Input, Textarea } from '@rewind-ui/core'
 import { useForm } from 'react-hook-form'
 import { useAdminHistory } from '../context/AdminHistoryContext'
-import { BiChevronDown } from 'react-icons/bi'
+import { BiChevronDown, BiEdit, BiTrash } from 'react-icons/bi'
 import days from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 days.extend(utc)
@@ -16,9 +16,11 @@ const ProfilePage = () => {
     const [user, setUser] = useState(null)
     const [adminHistory, setAdminHistory] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [update, setUpdate] = useState(false)
+    const [adminHistoryUpdate, setAdminHistoryUpdate] = useState({})
     const [open, setOpen] = useState(false);
     const { register, handleSubmit, setValue } = useForm()
-    const { createAdminHistory, getAdminHistories, adminHistories } = useAdminHistory()
+    const { createAdminHistory, getAdminHistories, adminHistories, deleteAdminHistory, updateAdminHistory } = useAdminHistory()
 
     const navigate = useNavigate()
 
@@ -49,10 +51,24 @@ const ProfilePage = () => {
             ...data,
             date: data.date ? days.utc(data.date).format() : days.utc().format(), userReceiver: user._id
         }
+
+        if (update) {
+            updateAdminHistory(params.id, dataValid)
+        }
+
         console.log(dataValid)
         createAdminHistory(dataValid)
         console.log(dataValid)
     })
+
+    const updateAdminHistoryFront = (adminHistory) => {
+        setUpdate(true)
+        setOpen(true)
+        setValue('title', adminHistory.title)
+        setValue('description', adminHistory.description)
+        setValue('date', adminHistory.date)
+        setAdminHistoryUpdate(adminHistory)
+    }
 
     return (
         <>
@@ -71,7 +87,10 @@ const ProfilePage = () => {
                                     </Dropdown.Trigger>
                                     <Dropdown.Content>
                                         <Dropdown.Item>
-                                            <button onClick={() => setOpen(true)}>Agregar Historial Admin</button>
+                                            <button onClick={() => {
+                                                setUpdate(false)
+                                                setOpen(true)
+                                            }}>Agregar Historial Admin</button>
                                         </Dropdown.Item>
                                         <Dropdown.Item>
                                             Messages
@@ -100,19 +119,15 @@ const ProfilePage = () => {
                                                     <div id={adminHistory._id} className=" border-b-2 pb-2 my-2">
                                                         <div className='flex justify-between'>
                                                             <h2 className='text-bold text-lg'>{days(adminHistory.date).utc().format('DD/MM/YYYY')} — <span>{adminHistory.title}</span></h2>
-                                                            <Dropdown chevronRotation={false} color="slate" mode="tight" size="xs" withChevron={false}>
-                                                                <Dropdown.Trigger className=''>
-                                                                    <BiChevronDown />
-                                                                </Dropdown.Trigger>
-                                                                <Dropdown.Content>
-                                                                    <Dropdown.Item>
-                                                                        Editar
-                                                                    </Dropdown.Item>
-                                                                    <Dropdown.Item>
-                                                                        Borrar
-                                                                    </Dropdown.Item>
-                                                                </Dropdown.Content>
-                                                            </Dropdown>
+                                                            <div className='flex'>
+                                                                <button onClick={() => {
+                                                                    updateAdminHistoryFront(adminHistory)
+                                                                }
+                                                                }><BiEdit /></button>
+                                                                <button onClick={() => {
+                                                                    deleteAdminHistory(adminHistory._id)
+                                                                }}><BiTrash /></button>
+                                                            </div>
                                                         </div>
                                                         <p className='text-gray-700'>{adminHistory.description}</p>
                                                         <p className='text-bold'>por: <span className='text-yellow-400'>{adminHistory.user.username}</span></p>
@@ -146,7 +161,10 @@ const ProfilePage = () => {
                             {...register('title')} />
                         <Textarea className='my-2' shadow="base" tone="solid" type="textarea" placeholder='Descripcion'
                             {...register('description')} />
-                        <button className='m-2 border-2 text-black'>Crear2</button>
+
+                        {update ? (
+                            <Button>Actualizar</Button>
+                        ) : <button className='m-2 border-2 text-black'>Crear</button>}
                     </form>
                 </Card>
             </Modal>

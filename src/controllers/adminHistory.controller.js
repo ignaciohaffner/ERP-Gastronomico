@@ -45,26 +45,26 @@ export const createAdminHistory = async (req, res) => {
 
 // }
 
-// export const deleteTask = async (req, res) => {
-//     try {
-//         const task = await Task.findByIdAndDelete(req.params.id)
-//         if (!task) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
-//         return res.sendStatus(204)
-//     } catch (error) {
-//         return res.status(404).json({ message: 'no pudiste mostrar eso man' })
+export const deleteAdminHistory = async (req, res) => {
+    try {
+        const deletedAdminHistory = await AdminHistory.findByIdAndDelete(req.params.id)
+        if (!deletedAdminHistory) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
+        return res.sendStatus(204)
+    } catch (error) {
+        return res.status(404).json({ message: 'no pudiste mostrar eso man' })
 
-//     }
-// }
+    }
+}
 
-// export const updateTask = async (req, res) => {
+export const updateAdminHistory = async (req, res) => {
 
-//     try {
-//         const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, })
-//         if (!task) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
-//         res.json(task)
-//     } catch (error) {
-//         return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
-//     }
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, })
+        if (!task) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
+        res.json(task)
+    } catch (error) {
+        return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
+    }
 
-// }
+}
 

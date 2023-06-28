@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 import { useState } from 'react'
-import { createAdminHistoryRequest, getAdminHistoriesRequest } from '../api/adminhistory.js'
+import { createAdminHistoryRequest, deleteAdminHistoryRequest, getAdminHistoriesRequest, updateAdminHistoryRequest } from '../api/adminhistory.js'
 
 const AdminHistoryContext = createContext()
 
@@ -28,21 +28,21 @@ export function AdminHistoryProvider({ children }) {
         }
     }
 
-    const createAdminHistory = async (task) => {
+    const createAdminHistory = async (adminHistory) => {
 
-        const res = await createAdminHistoryRequest(task)
+        const res = await createAdminHistoryRequest(adminHistory)
         console.log(res)
     }
 
-    // const deleteTask = async (id) => {
-    //     try {
-    //         const res = await deleteTaskRequest(id)
-    //         if (res.status === 204) setTasks(tasks.filter(task => task._id != id))
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
+    const deleteAdminHistory = async (id) => {
+        try {
+            const res = await deleteAdminHistoryRequest(id)
+            if (res.status === 204) setAdminHistories(adminHistories.filter(x => x._id != id))
+        } catch (error) {
+            console.log(error)
+        }
 
-    // }
+    }
 
     // const getTask = async (id) => {
     //     try {
@@ -53,18 +53,20 @@ export function AdminHistoryProvider({ children }) {
     //     }
     // }
 
-    // const updateTask = async (id, task) => {
-    //     try {
-    //         await updateTaskRequest(id, task)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+    const updateAdminHistory = async (id, adminHistory) => {
+        try {
+            await updateAdminHistoryRequest(id, adminHistory)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <AdminHistoryContext.Provider value={{
             adminHistories,
             createAdminHistory,
             getAdminHistories,
+            deleteAdminHistory,
+            updateAdminHistory
         }}>
             {children}
         </AdminHistoryContext.Provider>

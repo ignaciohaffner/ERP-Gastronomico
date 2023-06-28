@@ -3,9 +3,10 @@ import AdminHistory from '../models/adminHistory.model.js'
 export const getAdminHistory = async (req, res) => {
     try {
         const adminHistories = await AdminHistory.find({
-            user: req.user.id
+            userReceiver: req.params.id
         }).populate('user')
         res.json(adminHistories)
+        console.log((adminHistories))
     } catch (error) {
         return res.status(500).json({ message: 'no pudiste mostrar eso mostro' })
     }

@@ -18,10 +18,11 @@ export function AdminHistoryProvider({ children }) {
 
     const [adminHistories, setAdminHistories] = useState([])
 
-    const getAdminHistories = async () => {
+    const getAdminHistories = async (id) => {
         try {
-            const res = await getAdminHistoriesRequest()
+            const res = await getAdminHistoriesRequest(id)
             setAdminHistories(res.data)
+            console.log(adminHistories)
         } catch (error) {
             console.log(error)
         }

@@ -4,7 +4,6 @@ export const getUsers = async (req, res) => {
     try {
         const users = await User.find()
         res.json(users)
-        console.log(users)
     } catch (error) {
         return res.status(500).json({ message: 'no pudiste mostrar eso ome' })
     }
@@ -14,7 +13,6 @@ export const getUser = async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
         res.json(user)
-        console.log(user)
     } catch (error) {
         return res.status(500).json({ message: 'no se encontro el user' })
 
@@ -24,7 +22,6 @@ export const getUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     try {
         const user = await User.findByIdAndDelete(req.params.id)
-        console.log(user)
         if (!user) return res.status(404).json({ message: 'no se encontro ese user mostro' })
         return res.sendStatus(204)
     } catch (error) {

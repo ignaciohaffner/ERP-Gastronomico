@@ -19,8 +19,7 @@ const adminHistorySchema = new mongoose.Schema(
             required: true,
         },
         userReceiver: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserReceiver',
+            type: String,
             required: true,
         },
 

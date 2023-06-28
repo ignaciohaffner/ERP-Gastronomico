@@ -51,6 +51,7 @@ export function UserProvider({ children }) {
     const updateUser = async (id, user) => {
         try {
             const res = await updateUserRequest(id, user)
+            console.log("que pasa aca")
             if (res.status === 204) setUsers(users.filter(user => user._id))
         } catch (error) {
             console.log(error, 'update user')

@@ -93,14 +93,28 @@ const ProfilePage = () => {
                                                 }}>Agregar Historial Admin</button>
                                             </Dropdown.Item>
                                             <Dropdown.Item>
-                                                Messages
+                                                <button onClick={() => {
+                                                    navigate(`/editprofile/${user._id}`)
+                                                }}>Editar usuario</button>
                                             </Dropdown.Item>
                                         </Dropdown.Content>
                                     </Dropdown>
                                 </div>
 
-                                <p>{user.role}</p>
-                                <p>Faction Management, Staff Management</p>
+                                <p>
+                                    {
+                                        user.rank === 'Manager' ? (<p className='text-yellow-400'>{user.rank}</p>) : (
+                                            user.rank === 'Support' ? (<p className='text-red-600'>{user.rank}</p>) : (
+                                                <p className='text-green-600'>{user.rank}</p>
+                                            )
+                                        )
+                                    }
+                                </p>
+                                <p><div className="flex flex-col">
+                                    {(user.team).map((team, index) => (
+                                        <span key={index} className="team-item">{team}</span>
+                                    ))}
+                                </div></p>
                             </div>
                             <div className='text-xl mx-10'>
                                 <p>Fecha de ingreso: {days(user.createAt).utc().format('DD/MM/YYYY')}</p>

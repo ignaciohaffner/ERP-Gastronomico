@@ -14,6 +14,7 @@ import RosterPage from './pages/RosterPage.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import ProtectedManagerRoutes from './ProtectedManagerRoutes.jsx'
 import ManagerPage from './pages/ManagerPage.jsx'
+import EditUser from './pages/EditUser.jsx'
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
                       <Route path='/roster' element={<RosterPage></RosterPage>} />
                       <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                       <Route path='/register' element={<RegisterPage></RegisterPage>} />
+                      <Route path='/editprofile/:id' element={<EditUser></EditUser>} />
                     </Route>
                   </Route>
                 </Routes>

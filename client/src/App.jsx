@@ -15,6 +15,7 @@ import { UserProvider } from './context/UserContext.jsx'
 import ProtectedManagerRoutes from './ProtectedManagerRoutes.jsx'
 import ManagerPage from './pages/ManagerPage.jsx'
 import EditUser from './pages/EditUser.jsx'
+import ChangePasswordPage from './pages/ChangePasswordPage.jsx'
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
                       <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                       <Route path='/register' element={<RegisterPage></RegisterPage>} />
                       <Route path='/editprofile/:id' element={<EditUser></EditUser>} />
+                      <Route path='/changepassword/:id' element={<ChangePasswordPage></ChangePasswordPage>} />
+                      <Route path='/changepassword/' element={<ChangePasswordPage></ChangePasswordPage>} />
+
                     </Route>
                   </Route>
                 </Routes>

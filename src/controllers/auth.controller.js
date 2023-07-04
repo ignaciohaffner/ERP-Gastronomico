@@ -41,6 +41,19 @@ export const register = async (req, res) => {
 
 }
 
+export const changePassword = async (req, res) => {
+    const { password } = req.body
+    console.log(password)
+    try {
+        const passwordHash = await bcrypt.hash(password, 10)
+        console.log(passwordHash)
+        const user = await User.findByIdAndUpdate(req.params.id, { password: passwordHash })
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 export const login = async (req, res) => {
     const { email, password } = req.body

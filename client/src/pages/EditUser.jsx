@@ -26,7 +26,6 @@ const EditUser = () => {
                 setLoading(false)
                 setValue('username', userFound.username)
                 setValue('email', userFound.email)
-                setValue('password', userFound.password)
                 setValue('dateAdmission', days(userFound.dateAdmission).utc().format('YYYY-MM-DD'))
                 setValue('rank', userFound.rank)
                 setLoading(false)
@@ -83,10 +82,6 @@ const EditUser = () => {
                                 <input type="date" {
                                     ...register('dateAdmission')
                                 } className="w-full bg-zinc-700 text-white my-2 px-4 py-2 rounded-md" />
-                                <p>Contraseña</p>
-                                <input type="password" {
-                                    ...register('password')
-                                } placeholder="Contraseña" className="w-full bg-zinc-700 text-white my-2 px-4 py-2 rounded-md" />
 
                                 <button type='submit' className=' bg-sky-500 text-white px-4 py-2 rounded-md my-2 '>
                                     Editar

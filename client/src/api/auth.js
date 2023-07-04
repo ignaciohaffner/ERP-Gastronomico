@@ -7,3 +7,5 @@ export const loginRequest = user => axios.post(`/login`, user)
 
 export const verifyTokenRequest = () => axios.get('/verify')
 
+export const changePasswordRequest = (id, user) => axios.put(`/changepassword/${id}`, user)
+

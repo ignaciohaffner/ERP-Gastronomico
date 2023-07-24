@@ -20,7 +20,7 @@ export const createAdminAnnouncement = async (req, res) => {
             title,
             description,
             date,
-            user: req.user.id,
+            user: req.user.id
         })
         const savedAdminAnnouncement = await newAdminAnnouncement.save()
         res.json(savedAdminAnnouncement)

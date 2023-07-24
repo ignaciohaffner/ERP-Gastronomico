@@ -16,6 +16,7 @@ export const createFood = async (req, res) => {
         const newFood = new Food({
             name,
             description,
+            price,
         })
         const savedFood = await newFood.save()
         res.json(savedFood)

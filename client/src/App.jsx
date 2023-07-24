@@ -1,5 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext.jsx'
+import { TaskProvider } from './context/TaskContext.jsx'
+import { UserProvider } from './context/UserContext.jsx'
+import { AdminHistoryProvider } from './context/AdminHistoryContext.jsx'
+import { FoodProvider } from './context/FoodContext.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
@@ -7,16 +11,14 @@ import RegisterPage from './pages/RegisterPage.jsx'
 import TaskFormPage from './pages/TaskFormPage.jsx'
 import TasksPage from './pages/TasksPage.jsx'
 import ProtectedRoute from './ProtectedRoute.jsx'
-import { TaskProvider } from './context/TaskContext.jsx'
-import { AdminHistoryProvider } from './context/AdminHistoryContext.jsx'
 import Navbar from './components/Navbar.jsx'
 import RosterPage from './pages/RosterPage.jsx'
-import { UserProvider } from './context/UserContext.jsx'
 import ProtectedManagerRoutes from './ProtectedManagerRoutes.jsx'
 import ManagerPage from './pages/ManagerPage.jsx'
 import EditUser from './pages/EditUser.jsx'
 import ChangePasswordPage from './pages/ChangePasswordPage.jsx'
 import TakeOrder from './pages/ERP/TakeOrder.jsx'
+import CreateFood from './pages/ERP/CreateFood.jsx'
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
       <TaskProvider>
         <UserProvider>
           <AdminHistoryProvider>
+            <FoodProvider>
             <BrowserRouter>
               <main className='container mx-auto px-10'>
                 <Navbar></Navbar>
@@ -39,6 +42,7 @@ function App() {
                     <Route path='/profile/:id' element={<ProfilePage></ProfilePage>} />
                     <Route element={<ProtectedManagerRoutes />}>
                       <Route path='/takeorder' element={<TakeOrder/>}/>
+                      <Route path='/createfood' element={<CreateFood/>}/>
                       <Route path='/roster' element={<RosterPage></RosterPage>} />
                       <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                       <Route path='/register' element={<RegisterPage></RegisterPage>} />
@@ -51,6 +55,7 @@ function App() {
                 </Routes>
               </main>
             </BrowserRouter>
+            </FoodProvider>
           </AdminHistoryProvider>
         </UserProvider>
       </TaskProvider>

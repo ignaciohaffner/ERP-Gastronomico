@@ -12,7 +12,7 @@ const Navbar = () => {
             <Link to={
                 isAuthenticated ? '/tasks' : '/'
             }>
-                <h1 className=' text-2xl font-bold'>Sistema de Gestion de Staff</h1>
+                <h1 className=' text-2xl font-bold'>Sistema de control comercial</h1>
             </Link>
             <ul className=' flex gap-x-2 '>
                 {isAuthenticated ? (
@@ -42,6 +42,14 @@ const Navbar = () => {
                                 </li>
                             ) : null
                         }
+                        <li className=''>
+                                    <Button color="white" tone="outline" shadow="base">
+                                        <Link to='/takeorder'
+                                            className=''
+                                        >Take order</Link>
+                                    </Button>
+
+                                </li>
                         <li>
 
                             <Dropdown>

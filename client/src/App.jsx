@@ -16,6 +16,7 @@ import ProtectedManagerRoutes from './ProtectedManagerRoutes.jsx'
 import ManagerPage from './pages/ManagerPage.jsx'
 import EditUser from './pages/EditUser.jsx'
 import ChangePasswordPage from './pages/ChangePasswordPage.jsx'
+import TakeOrder from './pages/ERP/TakeOrder.jsx'
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                     <Route path='/profile' element={<ProfilePage></ProfilePage>} />
                     <Route path='/profile/:id' element={<ProfilePage></ProfilePage>} />
                     <Route element={<ProtectedManagerRoutes />}>
+                      <Route path='/takeorder' element={<TakeOrder/>}/>
                       <Route path='/roster' element={<RosterPage></RosterPage>} />
                       <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                       <Route path='/register' element={<RegisterPage></RegisterPage>} />

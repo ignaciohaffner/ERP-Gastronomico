@@ -5,6 +5,7 @@ import authRoutes from './routes/auth.routes.js'
 import taskRoutes from './routes/task.routes.js'
 import userRoutes from './routes/user.router.js'
 import adminHistoryRoutes from './routes/adminHistory.routes.js'
+import foodRoutes from './routes/food.routes.js'
 import cors from "cors"
 
 
@@ -23,5 +24,6 @@ app.use('/api', authRoutes)
 app.use('/api', taskRoutes)
 app.use('/api', userRoutes)
 app.use('/api', adminHistoryRoutes)
+app.use('/api', foodRoutes)
 
 export default app

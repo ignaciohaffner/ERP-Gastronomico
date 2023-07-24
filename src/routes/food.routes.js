@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { authRequired } from '../middlewares/validateToken.js'
 import { getFood, getFoods, createFood, updateFood, deleteFood } from "../controllers/food.controller.js";
-import { validateSchema } from "../middlewares/validator.middleware.js"
-import { verifyRole } from "../middlewares/validateRole.js";
+
 const router = Router()
 
 router.get('/foods', authRequired, getFoods)

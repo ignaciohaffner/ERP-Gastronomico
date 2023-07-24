@@ -3,7 +3,7 @@ import Food from '../models/food.model.js'
 export const getFoods = async (req, res) => {
     try {
         const foods = await Food.find()
-        res.json(tasks)
+        res.json(foods)
     } catch (error) {
         return res.status(500).json({ message: 'no pudiste mostrar eso mostro' })
     }
@@ -12,7 +12,7 @@ export const getFoods = async (req, res) => {
 export const createFood = async (req, res) => {
 
     try {
-        const { name, description } = req.body
+        const { name, description,price } = req.body
         const newFood = new Food({
             name,
             description,

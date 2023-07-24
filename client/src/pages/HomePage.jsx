@@ -11,52 +11,51 @@ days.extend(utc)
 
 const HomePage = () => {
 
-    const [loading, setLoading] = useState(true)
-    const [open, setOpen] = useState(false);
-    const { register, handleSubmit, setValue } = useForm()
+    // const [loading, setLoading] = useState(true)
+    // const [open, setOpen] = useState(false);
+    // const { register, handleSubmit, setValue } = useForm()
 
-    const { adminAnnouncements,
-        getAdminAnnouncements,
-        createAdminAnnouncement } = useAdminAnnouncement()
-
-
-    const { user } = useAuth()
-
-    useEffect(() => {
-        if (!user) {
-            setLoading(true)
-        }
-
-        setTimeout(() => {
-            setLoading(false)
-        }, 1000)
+    // const { adminAnnouncements,
+    //     getAdminAnnouncements,
+    //     createAdminAnnouncement } = useAdminAnnouncement()
 
 
-    }, [])
+    // const { user } = useAuth()
 
-    const { colorRole } = useCheckRole(user)
+    // useEffect(() => {
+    //     if (!user) {
+    //         setLoading(true)
+    //     }
 
-    const onSubmit = handleSubmit((data) => {
-        const dataValid = {
-            ...data,
-            date: data.date ? days.utc(data.date).format() : days.utc().format()
-        }
+    //     setTimeout(() => {
+    //         setLoading(false)
+    //     }, 1000)
 
-        console.log(dataValid)
-        createAdminAnnouncement(dataValid)
-        console.log(dataValid)
-    })
+
+    // }, [])
+
+    // const { colorRole } = useCheckRole(user)
+
+    // const onSubmit = handleSubmit((data) => {
+    //     const dataValid = {
+    //         ...data,
+    //         date: data.date ? days.utc(data.date).format() : days.utc().format()
+    //     }
+
+    //     console.log(dataValid)
+    //     createAdminAnnouncement(dataValid)
+    //     console.log(dataValid)
+    // })
 
 
     return (
         <>
-            {loading ? <h1>Cargando...</h1> : (<h1>¡Bienvenido <span className={colorRole
+            {/* {loading ? <h1>Cargando...</h1> : (<h1>¡Bienvenido <span className={colorRole
             }>{user.username}</span>!</h1>)
 
-            }
-
+            } */}
+            {/* 
             <div className='flex  flex-col justify-center mt-10'>
-                {/* <img className='h-1/2 w-1/2 m-auto' src="https://cdn.discordapp.com/attachments/1033509845803999248/1034591548693819432/unknown.png" alt="" /> */}
                 <div className='flex justify-between'>
                     <h2 className='text-3xl  textbold mt-4'>Anuncios</h2>
                     <button onClick={() => setOpen(true)} className=' px-3 text-center my-3 bg-green-400'>+</button>
@@ -73,24 +72,24 @@ const HomePage = () => {
                         <p> Por: <span className='text-yellow-400'>Boomer</span> — 10/10/2022 </p>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <Modal size="md" open={open} onClose={() => setOpen(false)}>
+            {/* <Modal size="md" open={open} onClose={() => setOpen(false)}>
                 <Card className='p-5'>
                     <form onSubmit={onSubmit}>
                         <label className='text-black text-md text-center mb-2'>Historial Administrativo </label>
                         <Input className='my-2' shadow="base" tone="solid" type="text" placeholder='Ingresa el titulo' autoFocus
                             {...register('title')} />
                         <Textarea className='my-2' shadow="base" tone="solid" type="textarea" placeholder='Descripcion'
-                            {...register('description')} />
+                            {...register('description')} /> */}
 
-                        {/* {update ? (
+            {/* {update ? (
                             <Button>Actualizar</Button>
                         ) : <button className='m-2 border-2 text-black'>Crear</button>} */}
-                        <button className='m-2 border-2 text-black'>Crear</button>
+            {/* <button className='m-2 border-2 text-black'>Crear</button>
                     </form>
                 </Card>
-            </Modal>
+            </Modal> */}
 
         </>
     )

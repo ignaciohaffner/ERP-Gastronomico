@@ -5,7 +5,10 @@ import authRoutes from './routes/auth.routes.js'
 import taskRoutes from './routes/task.routes.js'
 import userRoutes from './routes/user.router.js'
 import adminHistoryRoutes from './routes/adminHistory.routes.js'
+import adminAnnouncementRoutes from './routes/adminAnnouncement.routes.js'
+
 import cors from "cors"
+
 
 
 const app = express()
@@ -23,5 +26,6 @@ app.use('/api', authRoutes)
 app.use('/api', taskRoutes)
 app.use('/api', userRoutes)
 app.use('/api', adminHistoryRoutes)
+app.use('/api', adminAnnouncementRoutes)
 
 export default app

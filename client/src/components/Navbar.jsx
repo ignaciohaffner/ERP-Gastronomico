@@ -52,7 +52,7 @@ const Navbar = () => {
                                 </Dropdown.Trigger>
                                 <Dropdown.Content>
                                     <Dropdown.Label>{user.username}</Dropdown.Label>
-                                    <Dropdown.Item> <Link to={`/profile/${user._id}`}>Profile</Link> </Dropdown.Item>
+                                    <Dropdown.Item> <Link to={`/profile/${user.id}`}>Profile</Link> </Dropdown.Item>
                                     <Dropdown.Divider />
                                     <Dropdown.Item>
                                         Settings

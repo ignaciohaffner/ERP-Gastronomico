@@ -97,6 +97,7 @@ const ProfilePage = () => {
                                                     navigate(`/editprofile/${user._id}`)
                                                 }}>Editar usuario</button>
                                             </Dropdown.Item>
+
                                             <Dropdown.Item>
                                                 <button onClick={() => {
                                                     navigate(`/changepassword/${user._id}`)

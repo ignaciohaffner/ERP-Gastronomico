@@ -13,8 +13,9 @@ import socketIOClient from 'socket.io-client';
 const ActiveOrders = () => {
 
     const { orders, getOrders, updateOrder } = useOrder()
-
     const [socket, setSocket] = useState(null); // Add state for socket instance
+    const [clickCount, setClickCount] = useState(0);
+
 
   useEffect(() => {
     // Fetch orders when the component mounts
@@ -46,6 +47,19 @@ const ActiveOrders = () => {
         getOrders(); // Obtener la lista actualizada de órdenes después de desactivar una orden
     }
 
+    const handleButtonClick = (order) => {
+      // Incrementar el contador en 1 cada vez que se hace clic en el botón
+      setClickCount(clickCount + 1);
+      
+      // Ejecutar la función deactivateOrder solo cuando el contador llega a 2
+      if (clickCount + 1 === 2) {
+        deactivateOrder(order);
+        
+        // Reiniciar el contador después de ejecutar la función
+        setClickCount(0);
+      }
+    };
+
     const activeOrders = orders.filter(order => order.activeOrder);
 
 
@@ -67,7 +81,7 @@ const ActiveOrders = () => {
                             <p>${order.amount}</p>
                             <p>{order.paymentType}</p>
                             <p>{order.deliveryAddress === "" ? "Take Away" : order.deliveryAddress}</p>
-                            <button className='bg-green-500 p-1 rounded' onClick={()=> deactivateOrder(order)} >Despachar</button>
+                            <button className='bg-green-500 p-1 rounded' onClick={() => handleButtonClick(order)} >Despachar</button>
                         </div>
                     </div>
                 ))

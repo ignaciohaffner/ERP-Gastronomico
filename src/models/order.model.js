@@ -7,11 +7,11 @@ const orderSchema = new mongoose.Schema(
             required: true,
         },
         ammount: {
-            type: number,
+            type: Number,
             required: true,
         },
         articles: {
-            type: array
+            type: Array
         },
 
     }, {

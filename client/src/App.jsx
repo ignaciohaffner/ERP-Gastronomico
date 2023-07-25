@@ -4,6 +4,7 @@ import { TaskProvider } from './context/TaskContext.jsx'
 import { UserProvider } from './context/UserContext.jsx'
 import { AdminHistoryProvider } from './context/AdminHistoryContext.jsx'
 import { FoodProvider } from './context/FoodContext.jsx'
+import { OrderProvider } from './context/OrderContext.jsx'
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
@@ -27,34 +28,36 @@ function App() {
         <UserProvider>
           <AdminHistoryProvider>
             <FoodProvider>
-              <BrowserRouter>
-                <main className='container mx-auto px-10'>
-                  <Navbar></Navbar>
-                  <Routes>
-                    <Route path='/' element={<HomePage />} />
-                    <Route path='/login' element={<LoginPage />} />
+              <OrderProvider>
+                <BrowserRouter>
+                  <main className='container mx-auto px-10'>
+                    <Navbar></Navbar>
+                    <Routes>
+                      <Route path='/' element={<HomePage />} />
+                      <Route path='/login' element={<LoginPage />} />
 
-                    <Route element={<ProtectedRoute />}>
-                      <Route path='/tasks' element={<TasksPage></TasksPage>} />
-                      <Route path='/add-task' element={<TaskFormPage></TaskFormPage>} />
-                      <Route path='/tasks/:id' element={<TaskFormPage></TaskFormPage>} />
-                      <Route path='/profile' element={<ProfilePage></ProfilePage>} />
-                      <Route path='/profile/:id' element={<ProfilePage></ProfilePage>} />
-                      <Route element={<ProtectedManagerRoutes />}>
-                        <Route path='/takeorder' element={<TakeOrder />} />
-                        <Route path='/createfood' element={<CreateFood />} />
-                        <Route path='/roster' element={<RosterPage></RosterPage>} />
-                        <Route path='/manager' element={<ManagerPage></ManagerPage>} />
-                        <Route path='/register' element={<RegisterPage></RegisterPage>} />
-                        <Route path='/editprofile/:id' element={<EditUser></EditUser>} />
-                        <Route path='/changepassword/:id' element={<ChangePasswordPage></ChangePasswordPage>} />
-                        <Route path='/changepassword/' element={<ChangePasswordPage></ChangePasswordPage>} />
+                      <Route element={<ProtectedRoute />}>
+                        <Route path='/tasks' element={<TasksPage></TasksPage>} />
+                        <Route path='/add-task' element={<TaskFormPage></TaskFormPage>} />
+                        <Route path='/tasks/:id' element={<TaskFormPage></TaskFormPage>} />
+                        <Route path='/profile' element={<ProfilePage></ProfilePage>} />
+                        <Route path='/profile/:id' element={<ProfilePage></ProfilePage>} />
+                        <Route element={<ProtectedManagerRoutes />}>
+                          <Route path='/takeorder' element={<TakeOrder />} />
+                          <Route path='/createfood' element={<CreateFood />} />
+                          <Route path='/roster' element={<RosterPage></RosterPage>} />
+                          <Route path='/manager' element={<ManagerPage></ManagerPage>} />
+                          <Route path='/register' element={<RegisterPage></RegisterPage>} />
+                          <Route path='/editprofile/:id' element={<EditUser></EditUser>} />
+                          <Route path='/changepassword/:id' element={<ChangePasswordPage></ChangePasswordPage>} />
+                          <Route path='/changepassword/' element={<ChangePasswordPage></ChangePasswordPage>} />
 
+                        </Route>
                       </Route>
-                    </Route>
-                  </Routes>
-                </main>
-              </BrowserRouter>
+                    </Routes>
+                  </main>
+                </BrowserRouter>
+              </OrderProvider>
             </FoodProvider>
           </AdminHistoryProvider>
         </UserProvider>

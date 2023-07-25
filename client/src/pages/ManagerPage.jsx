@@ -7,7 +7,7 @@ const ManagerPage = () => {
 
     return (
         <div>
-            <Link to={`/cambiarcontraseña/${user._id}`}></Link>
+            
         </div>
     )
 }

@@ -51,6 +51,6 @@ app.use('/api', userRoutes);
 app.use('/api', adminHistoryRoutes);
 app.use('/api', adminAnnouncementRoutes);
 app.use('/api', foodRoutes);
-app.use('/api', orderRoutes);
+app.use('/api', orderRoutes(io));
 
 export default app;

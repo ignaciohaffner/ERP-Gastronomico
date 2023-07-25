@@ -11,9 +11,10 @@ export const getOrders = async (req, res) => {
     }
 }
 
-export const createOrder = async (req, res) => {
+export const createOrder = async (req, res, io) => {
     try {
-      const { paymentType, amount, articles, customerName, deliveryAddress } = req.body;
+      const { paymentType, amount, articles, customerName, deliveryAddress } =
+        req.body;
       const newOrder = new Order({
         paymentType,
         amount,
@@ -22,19 +23,13 @@ export const createOrder = async (req, res) => {
         deliveryAddress,
       });
       const savedOrder = await newOrder.save();
-  
-      // Send the WebSocket event before sending the JSON response
-      try {
-        io.emit('newOrder', savedOrder);
-      } catch (error) {
-        console.log('Error while emitting WebSocket event:', error);
-      }
-  
-      // Send the JSON response
-      res.json(savedOrder);
+      res.json(savedOrder); // Sending the single response
+      io.emit('newOrder', savedOrder); // Emit the newOrder event to connected WebSocket clients
     } catch (error) {
-      console.log('Error while saving order:', error);
-      return res.status(500).json({ message: 'no pudiste agregar eso mostro' });
+      console.log('no funco man');
+      return res
+        .status(500)
+        .json({ message: 'no pudiste agregar eso mostro' }); // Handling the error in the same response
     }
   };
 

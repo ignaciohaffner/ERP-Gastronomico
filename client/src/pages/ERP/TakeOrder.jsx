@@ -12,7 +12,7 @@ const TakeOrder = () => {
     const [paymentType, setPaymentType] = useState('Efectivo'); // Estado para mantener el valor del método de pago
     const [showInput, setShowInput] = useState(false)
     const [clientName, setClientName] = useState('')
-    const [deliveryAdress, setDeliveryAdress] = useState('')
+    const [deliveryAddress, setDeliveryAddress] = useState('')
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ const TakeOrder = () => {
             paymentType: paymentType,
             amount: amount,
             articles: cartItems,
-            deliveryAdress: deliveryAdress,
+            deliveryAddress: deliveryAddress,
             customerName: clientName,
         }
         createOrder(orderData)
@@ -111,7 +111,7 @@ const TakeOrder = () => {
                                 }} />
                                 <p>Delivery</p>
                             </div>
-                            <Input placeholder='Direccion' type="text" className={showInput ? 'block' : 'hidden'} onChange={(e) => setDeliveryAdress(e.target.value)}></Input>
+                            <Input placeholder='Direccion' type="text" className={showInput ? 'block' : 'hidden'} onChange={(e) => setDeliveryAddress(e.target.value)}></Input>
 
                             <div className='flex justify-center gap-x-6 mt-5 mb-2 '>
                                 <Button className='bg-green-500 text-white font-bold rounded' onClick={submitOrder}>Confirmar</Button>

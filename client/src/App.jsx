@@ -21,6 +21,7 @@ import ChangePasswordPage from './pages/ChangePasswordPage.jsx'
 import TakeOrder from './pages/ERP/TakeOrder.jsx'
 import CreateFood from './pages/ERP/CreateFood.jsx'
 import OrdersList from './pages/ERP/OrdersList.jsx'
+import ActiveOrders from './pages/ERP/ActiveOrders.jsx'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                           <Route path='/takeorder' element={<TakeOrder />} />
                           <Route path='/createfood' element={<CreateFood />} />
                           <Route path='/orderslist' element={<OrdersList />} />
+                          <Route path='/activeorders' element={<ActiveOrders />} />
                           <Route path='/roster' element={<RosterPage></RosterPage>} />
                           <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                           <Route path='/register' element={<RegisterPage></RegisterPage>} />

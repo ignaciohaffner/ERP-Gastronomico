@@ -13,12 +13,17 @@ const orderSchema = new mongoose.Schema(
         articles: {
             type: Array
         },
-        deliveryAdress: {
-            type: String
+        deliveryAddress: {
+            type: String,
+            default: "Take Away",
         },
         customerName: {
             type: String
         },
+        activeOrder: {
+            type: Boolean,
+            default: true
+        }
 
     }, {
     timestamps: true

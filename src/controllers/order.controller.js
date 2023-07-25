@@ -12,11 +12,13 @@ export const getOrders = async (req, res) => {
 export const createOrder = async (req, res) => {
 
     try {
-        const { paymentType, amount, articles } = req.body
+        const { paymentType, amount, articles, customerName, deliveryAddress } = req.body
         const newOrder = new Order({
             paymentType,
             amount,
             articles,
+            customerName,
+            deliveryAddress
         })
         const savedOrder = await newOrder.save()
         res.json(savedOrder)

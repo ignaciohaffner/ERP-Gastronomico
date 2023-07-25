@@ -13,6 +13,12 @@ const orderSchema = new mongoose.Schema(
         articles: {
             type: Array
         },
+        deliveryAdress: {
+            type: String
+        },
+        customerName: {
+            type: String
+        },
 
     }, {
     timestamps: true

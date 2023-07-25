@@ -30,7 +30,8 @@ export function OrderProvider({ children }) {
     const createOrder = async (order) => {
 
         const res = await createOrderRequest(order)
-        console.log(res)
+        console.log(res) 
+        getOrders()
     }
 
     const deleteOrder = async (id) => {

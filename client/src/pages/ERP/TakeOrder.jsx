@@ -66,8 +66,8 @@ const TakeOrder = () => {
                     <div className='flex flex-row w-1/2 m-5 flex-wrap items-center   gap-5'>
                         {
                             foods.map(food => (
-                                <button onClick={() => addToCart(food)}>
-                                    <div key={food._id} className='border-2 rounded h-20 w-20 text-center flex flex-col justify-center'>
+                                <button key={food._id} onClick={() => addToCart(food)}>
+                                    <div  className='border-2 rounded h-20 w-20 text-center flex flex-col justify-center'>
                                         <p>{food.name}</p>
                                         <p>${food.price}</p>
                                     </div>

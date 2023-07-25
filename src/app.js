@@ -12,6 +12,7 @@ import adminHistoryRoutes from './routes/adminHistory.routes.js';
 import adminAnnouncementRoutes from './routes/adminAnnouncement.routes.js';
 import foodRoutes from './routes/food.routes.js';
 import orderRoutes from './routes/order.routes.js';
+import ingredientRoutes from './routes/ingredient.routes.js'
 
 const app = express();
 const server = http.createServer(app);
@@ -52,5 +53,6 @@ app.use('/api', adminHistoryRoutes);
 app.use('/api', adminAnnouncementRoutes);
 app.use('/api', foodRoutes);
 app.use('/api', orderRoutes(io));
+app.use('/api', ingredientRoutes)
 
 export default app;

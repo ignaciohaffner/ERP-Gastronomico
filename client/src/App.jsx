@@ -5,6 +5,8 @@ import { UserProvider } from './context/UserContext.jsx'
 import { AdminHistoryProvider } from './context/AdminHistoryContext.jsx'
 import { FoodProvider } from './context/FoodContext.jsx'
 import { OrderProvider } from './context/OrderContext.jsx'
+import { IngredientProvider } from './context/IngredientContext.jsx'
+
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import ProfilePage from './pages/ProfilePage.jsx'
@@ -22,6 +24,8 @@ import TakeOrder from './pages/ERP/TakeOrder.jsx'
 import CreateFood from './pages/ERP/CreateFood.jsx'
 import OrdersList from './pages/ERP/OrdersList.jsx'
 import ActiveOrders from './pages/ERP/ActiveOrders.jsx'
+import CreateIngredient from './pages/ERP/CreateIngredient.jsx'
+import CreateFoodAlternative from './pages/ERP/CreateFoodAlternative.jsx'
 
 function App() {
   return (
@@ -31,6 +35,7 @@ function App() {
           <AdminHistoryProvider>
             <FoodProvider>
               <OrderProvider>
+                <IngredientProvider>
                 <BrowserRouter>
                   <main className='container mx-auto px-10'>
                     <Navbar></Navbar>
@@ -46,9 +51,13 @@ function App() {
                         <Route path='/profile/:id' element={<ProfilePage></ProfilePage>} />
                         <Route element={<ProtectedManagerRoutes />}>
                           <Route path='/takeorder' element={<TakeOrder />} />
-                          <Route path='/createfood' element={<CreateFood />} />
+                          <Route path='/createfood' element={<CreateFoodAlternative />} />
                           <Route path='/orderslist' element={<OrdersList />} />
                           <Route path='/activeorders' element={<ActiveOrders />} />
+                          <Route path='/createingredient' element={<CreateIngredient />} />
+                          <Route path='/createingredient' element={<CreateIngredient />} />
+                          
+
                           <Route path='/roster' element={<RosterPage></RosterPage>} />
                           <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                           <Route path='/register' element={<RegisterPage></RegisterPage>} />
@@ -61,6 +70,7 @@ function App() {
                     </Routes>
                   </main>
                 </BrowserRouter>
+                </IngredientProvider>
               </OrderProvider>
             </FoodProvider>
           </AdminHistoryProvider>

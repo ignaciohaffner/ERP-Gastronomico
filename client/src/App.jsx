@@ -20,6 +20,7 @@ import EditUser from './pages/EditUser.jsx'
 import ChangePasswordPage from './pages/ChangePasswordPage.jsx'
 import TakeOrder from './pages/ERP/TakeOrder.jsx'
 import CreateFood from './pages/ERP/CreateFood.jsx'
+import OrdersList from './pages/ERP/OrdersList.jsx'
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                         <Route element={<ProtectedManagerRoutes />}>
                           <Route path='/takeorder' element={<TakeOrder />} />
                           <Route path='/createfood' element={<CreateFood />} />
+                          <Route path='/orderslist' element={<OrdersList />} />
                           <Route path='/roster' element={<RosterPage></RosterPage>} />
                           <Route path='/manager' element={<ManagerPage></ManagerPage>} />
                           <Route path='/register' element={<RegisterPage></RegisterPage>} />

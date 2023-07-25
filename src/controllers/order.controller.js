@@ -12,15 +12,16 @@ export const getOrders = async (req, res) => {
 export const createOrder = async (req, res) => {
 
     try {
-        const { paymentType, ammount, articles } = req.body
-        const newOrder = new Food({
+        const { paymentType, amount, articles } = req.body
+        const newOrder = new Order({
             paymentType,
-            ammount,
+            amount,
             articles,
         })
         const savedOrder = await newOrder.save()
         res.json(savedOrder)
     } catch (error) {
+        console.log('no funco man')
         return res.status(500).json({ message: 'no pudiste agregar eso mostro' })
     }
 

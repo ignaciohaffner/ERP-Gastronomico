@@ -14,7 +14,7 @@ const CreateFood = () => {
     useEffect(() => {
         async function loadFood() {
             if (params.id) {
-                const task = await getFood(params.id)
+                const food = await getFood(params.id)
                 console.log(food)
                 setValue('name', food.name)
                 setValue('description', food.description)
@@ -41,18 +41,18 @@ const CreateFood = () => {
 
     return (
         <>
-                <div className='flex gap-5'>
-                    {
-                        foods.map(food => (
-                            <div className='border-2 p-2' key={food._id}>
-                                <p>{food.name}</p>
-                                <p>{food.price}</p>
-                            </div>
-                            
-                        ))
-                    }
-                </div>
-                <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
+            <div className='flex gap-5'>
+                {
+                    foods.map(food => (
+                        <div className='border-2 p-2' key={food._id}>
+                            <p>{food.name}</p>
+                            <p>{food.price}</p>
+                        </div>
+
+                    ))
+                }
+            </div>
+            <div className='flex h-[calc(100vh-100px)] items-center justify-center'>
                 <div className='bg-zinc-800 max-w-md w-full p-10 rounded-md'>
                     <form onSubmit={onSubmit}>
                         <label htmlFor="Name">Name</label>
@@ -74,10 +74,10 @@ const CreateFood = () => {
                     </form>
                 </div>
             </div>
-    </>
+        </>
 
 
-        
+
     )
 }
 

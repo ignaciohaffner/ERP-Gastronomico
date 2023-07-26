@@ -15,8 +15,7 @@ const foodSchema = new mongoose.Schema(
             required: true
         },
         ingredients: {
-            type: Map, // Usamos Map para almacenar los ingredientes y sus cantidades
-            of: Number // Especificamos que los valores del Map serán de tipo Number (las cantidades)
+            type: Array    
           },
 
     }, {

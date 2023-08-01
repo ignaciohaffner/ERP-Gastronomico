@@ -57,6 +57,7 @@ const CreateIngredient = () => {
                             <p>{food.name}</p>
                             <p>Cantidad: {food.quantity}</p>
                             <p>${food.price}</p>
+                            <p>{food.conversion}</p>
                         </div>
 
                     ))
@@ -73,8 +74,9 @@ const CreateIngredient = () => {
                         <label htmlFor="Type">Type</label>
 
                                     <select className='w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2' value={ selectedValue } onChange={ (event) => {setSelectedValue( event.target.value) }}>
+                                    <option value="Peso" selected>Peso</option>
+                                                
                                                 <option value="Unidad">Unidad</option>
-                                                <option value="Peso" selected="true">Peso</option>
                                     </select>
 
                                     {selectedValue === "Unidad" ? (

@@ -13,6 +13,12 @@ const ingredientsSchema = new mongoose.Schema(
             type: Number,
             required: true
         },
+        type: {
+            type: Object,
+        },
+        conversion: {
+            type: Number,
+        }
 
     }, {
     timestamps: true

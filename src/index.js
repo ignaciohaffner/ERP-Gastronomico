@@ -2,5 +2,10 @@ import app from './app.js'
 import { connectdb } from './db.js'
 
 connectdb()
-app.listen(4000)
-console.log('Server on port', 4000)
+
+const port = process.env.PORT ?? 4000;
+console.log('Server on port', port)
+
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});

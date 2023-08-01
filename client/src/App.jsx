@@ -26,6 +26,7 @@ import OrdersList from './pages/ERP/OrdersList.jsx'
 import ActiveOrders from './pages/ERP/ActiveOrders.jsx'
 import CreateIngredient from './pages/ERP/CreateIngredient.jsx'
 import CreateFoodAlternative from './pages/ERP/CreateFoodAlternative.jsx'
+import Estadisticas from './pages/ERP/Estadisticas.jsx'
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
                           <Route path='/activeorders' element={<ActiveOrders />} />
                           <Route path='/createingredient' element={<CreateIngredient />} />
                           <Route path='/createingredient' element={<CreateIngredient />} />
+                          <Route path='/estadisticas' element={<Estadisticas />} />
                           
 
                           <Route path='/roster' element={<RosterPage></RosterPage>} />

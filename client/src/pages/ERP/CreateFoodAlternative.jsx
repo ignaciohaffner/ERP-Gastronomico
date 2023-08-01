@@ -68,7 +68,7 @@ const CreateFoodAlternative = () => {
   return (
     <>
       <div>
-        {filteredIngredients.map((ingredient) => (
+        {ingredients.map((ingredient) => (
           <div className='flex gap-x-2 my-2 w-1/2' key={ingredient._id}>
             <input
               type='checkbox'

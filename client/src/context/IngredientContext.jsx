@@ -8,6 +8,10 @@ import {
   updateIngredientRequest,
 } from '../api/ingredient';
 
+import {
+  createStockMovementRequest,
+} from '../api/stockMovement'
+
 const IngredientContext = createContext();
 
 export const useIngredient = () => {
@@ -52,16 +56,18 @@ export function IngredientProvider({ children }) {
     }
   }
 
-  const createStockForIngredient = async (ingredientId) => {
+  const createStockForIngredient = async (stock) => {
     try {
-      // Crea el nuevo registro de stock
+      console.log(stock)
       const newStock = {
-        ingredient: ingredientId,
-        quantity: 0, // Puedes establecer la cantidad inicial en 0 o cualquier otro valor predeterminado
-        // Otros campos del stock, si los hay
+        ingredient: stock.ingredient,
+        quantity: stock.quantity, 
+        movementType: stock.movementType,
+        price: stock.price
+
       };
   
-      const res = await createStockRequest(newStock);
+      const res = await createStockMovementRequest(newStock);
       return res.data;
     } catch (error) {
       console.log(error);
@@ -104,6 +110,7 @@ export function IngredientProvider({ children }) {
         createIngredient,
         getIngredients,
         deleteIngredient,
+        createStockForIngredient,
         getIngredient,
         updateIngredient,
       }}

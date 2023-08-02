@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { authRequired } from '../middlewares/validateToken.js'
-import {getIngredients, getIngredient, createIngredient, deleteIngredient, updateIngredient} from '../controllers/ingredients.controller.js'
+import { createStockMovement, deleteStockMovement, getStockMovement, getStockMovements, updateStockMovement } from "../controllers/stockMovement.controller.js";
 
 const router = Router()
 
-router.get('/ingredients', authRequired, getIngredients)
-router.get('/ingredients/:id', authRequired, getIngredient)
-router.post('/ingredients', authRequired, createIngredient)
-router.delete('/ingredients/:id', authRequired, deleteIngredient)
-router.put('/ingredients/:id', authRequired, updateIngredient)
+router.get('/stock-movements', authRequired, getStockMovements)
+router.get('/stock-movements/:id', authRequired, getStockMovement)
+router.post('/stock-movements', authRequired, createStockMovement)
+router.delete('/stock-movements/:id', authRequired, deleteStockMovement)
+router.put('/stock-movements/:id', authRequired, updateStockMovement)
 
 export default router

@@ -18,6 +18,7 @@ export const createStockMovement = async (req, res) => {
       price,
       movementType,
     });
+    console.log(newStockMovement)
     const savedStockMovement = await newStockMovement.save();
     res.json(savedStockMovement);
   } catch (error) {

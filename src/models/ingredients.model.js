@@ -18,7 +18,9 @@ const ingredientsSchema = new mongoose.Schema(
         },
         conversion: {
             type: Number,
-        }
+        },
+        stock: { type: mongoose.Schema.Types.ObjectId, ref: 'Stock' },
+
 
     }, {
     timestamps: true

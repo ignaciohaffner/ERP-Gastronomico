@@ -1,74 +1,114 @@
-import { createContext, useContext } from 'react'
-import { useState } from 'react'
-import { createIngredientRequest, deleteIngredientRequest, getIngredientRequest, getIngredientsRequest, updateIngredientRequest } from '../api/ingredient'
+import { createContext, useContext } from 'react';
+import { useState } from 'react';
+import {
+  createIngredientRequest,
+  deleteIngredientRequest,
+  getIngredientRequest,
+  getIngredientsRequest,
+  updateIngredientRequest,
+} from '../api/ingredient';
 
-const IngredientContext = createContext()
+const IngredientContext = createContext();
 
 export const useIngredient = () => {
-    const context = useContext(IngredientContext)
+  const context = useContext(IngredientContext);
 
-    if (!context) {
-        throw new Error('useTask must be used within a TaskProvider')
-    }
+  if (!context) {
+    throw new Error('useTask must be used within a TaskProvider');
+  }
 
-    return context
-}
+  return context;
+};
 
 export function IngredientProvider({ children }) {
+  const [ingredients, setIngredients] = useState([]);
+  const [ingredient, setIngredient] = useState(null); // Add a new state for the current ingredient
 
-    const [ingredients, setIngredients] = useState([])
-
-    const getIngredients = async () => {
-        try {
-            const res = await getIngredientsRequest()
-            setIngredients(res.data)
-        } catch (error) {
-            console.log(error)
-        }
+  const getIngredients = async () => {
+    try {
+      const res = await getIngredientsRequest();
+      setIngredients(res.data);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const createIngredient = async (ingredient) => {
+  const createIngredient = async (ingredient) => {
+    try {
+      // Crear el ingrediente
+      const res = await createIngredientRequest(ingredient);
+      const newIngredient = res.data;
 
-        const res = await createIngredientRequest(ingredient)
-        console.log(res)
+      // Crear el registro de stock asociado al ingrediente
+      const newStock = await createStockForIngredient(newIngredient._id);
+
+      // Actualizar el campo de referencia al stock en el ingrediente
+      newIngredient.stock = newStock._id;
+
+      // Actualizar el estado de ingredientes con el nuevo ingrediente
+      setIngredients([...ingredients, newIngredient]);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    const deleteIngredient = async (id) => {
-        try {
-            const res = await deleteIngredientRequest(id)
-            if (res.status === 204) setIngredients(ingredients.filter(task => task._id != id))
-        } catch (error) {
-            console.log(error)
-        }
-
+  const createStockForIngredient = async (ingredientId) => {
+    try {
+      // Crea el nuevo registro de stock
+      const newStock = {
+        ingredient: ingredientId,
+        quantity: 0, // Puedes establecer la cantidad inicial en 0 o cualquier otro valor predeterminado
+        // Otros campos del stock, si los hay
+      };
+  
+      const res = await createStockRequest(newStock);
+      return res.data;
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const getIngredient = async (id) => {
-        try {
-            const res = await getIngredientRequest(id)
-            return res.data
-        } catch (error) {
-            console.log(error)
-        }
+  const deleteIngredient = async (id) => {
+    try {
+      const res = await deleteIngredientRequest(id);
+      if (res.status === 204) setIngredients(ingredients.filter((task) => task._id != id));
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    const updateIngredient = async (id, ingredient) => {
-        try {
-            await updateIngredientRequest(id, ingredient)
-        } catch (error) {
-            console.log(error)
-        }
+  const getIngredient = async (id) => {
+    try {
+      const res = await getIngredientRequest(id);
+      setIngredient(res.data); // Set the current ingredient here
+    } catch (error) {
+      console.log(error);
     }
-    return (
-        <IngredientContext.Provider value={{
-            ingredients,
-            createIngredient,
-            getIngredients,
-            deleteIngredient,
-            getIngredient,
-            updateIngredient
-        }}>
-            {children}
-        </IngredientContext.Provider>
-    )
+  };
+
+  const updateIngredient = async (id, ingredient) => {
+    try {
+      await updateIngredientRequest(id, ingredient);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  // ... Rest of the code remains the same
+
+  return (
+    <IngredientContext.Provider
+      value={{
+        ingredients,
+        ingredient, // Add the current ingredient to the context value
+        createIngredient,
+        getIngredients,
+        deleteIngredient,
+        getIngredient,
+        updateIngredient,
+      }}
+    >
+      {children}
+    </IngredientContext.Provider>
+  );
 }

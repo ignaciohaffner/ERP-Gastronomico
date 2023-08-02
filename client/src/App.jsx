@@ -6,6 +6,8 @@ import { AdminHistoryProvider } from './context/AdminHistoryContext.jsx'
 import { FoodProvider } from './context/FoodContext.jsx'
 import { OrderProvider } from './context/OrderContext.jsx'
 import { IngredientProvider } from './context/IngredientContext.jsx'
+import { StockMovementProvider } from './context/StockMovementContext.jsx'
+
 
 import HomePage from './pages/HomePage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
@@ -27,6 +29,10 @@ import ActiveOrders from './pages/ERP/ActiveOrders.jsx'
 import CreateIngredient from './pages/ERP/CreateIngredient.jsx'
 import CreateFoodAlternative from './pages/ERP/CreateFoodAlternative.jsx'
 import Estadisticas from './pages/ERP/Estadisticas.jsx'
+import IngredientDetail from './pages/ERP/IngredientesNuevo/IngredientDetail.jsx'
+import IngredientList from './pages/ERP/IngredientesNuevo/IngredientList.jsx'
+import StockEntryForm from './pages/ERP/IngredientesNuevo/StockEntryForm.jsx'
+import StockOutForm from './pages/ERP/IngredientesNuevo/StockOutForm.jsx'
 
 function App() {
   return (
@@ -37,6 +43,7 @@ function App() {
             <FoodProvider>
               <OrderProvider>
                 <IngredientProvider>
+                  <StockMovementProvider>
                 <BrowserRouter>
                   <main className='container mx-auto px-10'>
                     <Navbar></Navbar>
@@ -58,6 +65,15 @@ function App() {
                           <Route path='/createingredient' element={<CreateIngredient />} />
                           <Route path='/createingredient' element={<CreateIngredient />} />
                           <Route path='/estadisticas' element={<Estadisticas />} />
+                          {/* ingredientes nuevos */}
+                          <Route path='/ingredients/:id/history' element={<IngredientDetail/>} />
+                          <Route path='ingredientlist' element={<IngredientList/>} />
+                          <Route path='stockentryform' element={<StockEntryForm/>} />
+                          <Route path='stockoutform' element={<StockOutForm/>} />
+
+
+                          {/* ingredientes nuevos */}
+
                           
 
                           <Route path='/roster' element={<RosterPage></RosterPage>} />
@@ -72,6 +88,7 @@ function App() {
                     </Routes>
                   </main>
                 </BrowserRouter>
+                </StockMovementProvider>
                 </IngredientProvider>
               </OrderProvider>
             </FoodProvider>

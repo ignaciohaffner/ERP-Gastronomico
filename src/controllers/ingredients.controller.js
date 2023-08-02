@@ -30,7 +30,7 @@ export const createIngredient = async (req, res) => {
 
 export const getIngredient = async (req, res) => {
     try {
-        const ingredient = await Ingredient.findById(req.params.id).populate('user')
+        const ingredient = await Ingredient.findById(req.params.id)
         console.log(req.params.id)
 
         if (!ingredient) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })

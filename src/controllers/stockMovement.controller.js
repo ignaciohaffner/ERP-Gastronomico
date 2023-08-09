@@ -1,3 +1,4 @@
+import { limpiarStock } from '../libs/cleanDatabase.js';
 import StockMovement from '../models/stockMovement.model.js';
 
 export const getStockMovements = async (req, res) => {
@@ -36,8 +37,20 @@ export const getStockMovement = async (req, res) => {
   }
 };
 
+
+export const getStockByIngredient = async (req,res) => {
+  try {
+    const stockMovement = await StockMovement.find({ingredient: req})
+    if (!stockMovement) return res.status(404).json({message: 'no se encontro un movimiento de stock para esa ID de ingrediente'})
+    res.json(stockMovement)
+  } catch(error) {
+    return res.status(404).json({message: 'no se encontro un movimiento de stock para esa ID de ingrediente'})
+  }
+}
+
 export const deleteStockMovement = async (req, res) => {
   try {
+    limpiarStock()
     const stockMovement = await StockMovement.findByIdAndDelete(req.params.id);
     if (!stockMovement) return res.status(404).json({ message: 'No se encontró el movimiento de stock.' });
     res.sendStatus(204);
@@ -52,6 +65,6 @@ export const updateStockMovement = async (req, res) => {
     if (!stockMovement) return res.status(404).json({ message: 'No se encontró el movimiento de stock.' });
     res.json(stockMovement);
   } catch (error) {
-    return res.status(404).json({ message: 'No se encontró el movimiento de stock.' });
+    console.log(error)
   }
 };

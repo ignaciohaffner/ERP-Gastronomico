@@ -24,6 +24,10 @@ const stockMovementSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    isUsed: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

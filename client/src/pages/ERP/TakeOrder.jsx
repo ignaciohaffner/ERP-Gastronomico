@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Button, Select, Input, Checkbox } from '@rewind-ui/core'
 import { useFood } from '../../context/FoodContext'
 import { useOrder } from '../../context/OrderContext'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TakeOrder = () => {
 
@@ -45,7 +47,7 @@ const TakeOrder = () => {
         }, 0);
     };
 
-    const submitOrder = () => {
+    const submitOrder = async () => {
         const orderData = {
             paymentType: paymentType,
             amount: amount,
@@ -53,8 +55,14 @@ const TakeOrder = () => {
             deliveryAddress: deliveryAddress,
             customerName: clientName,
         }
-        createOrder(orderData)
-        console.log(orderData)
+        try {
+            await createOrder(orderData);
+            toast.success('Pedido tomado exitosamente'); // Muestra una notificación de éxito
+            // ... Otro código después de tomar el pedido ...
+          } catch (error) {
+            toast.error('Error al tomar el pedido'); // Muestra una notificación de error
+          }
+
     }
 
     return (
@@ -121,6 +129,7 @@ const TakeOrder = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer position="top-right" autoClose={3000} />
         </>
     )
 }

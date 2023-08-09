@@ -36,7 +36,7 @@ export const getIngredient = async (req, res) => {
         if (!ingredient) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
         res.json(ingredient)
     } catch (error) {
-        return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
+        console.log(error)
     }
 
 }
@@ -47,20 +47,20 @@ export const deleteIngredient = async (req, res) => {
         if (!ingredient) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
         return res.sendStatus(204)
     } catch (error) {
-        return res.status(404).json({ message: 'no pudiste mostrar eso man' })
+        console.log(error)
 
     }
 }
 
 export const updateIngredient = async (req, res) => {
-
     try {
-        const ingredient = await ingredient.findByIdAndUpdate(req.params.id, req.body, { new: true, })
-        if (!ingredient) return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
-        res.json(ingredient)
+        const updatedIngredient = await Ingredient.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updatedIngredient) {
+            return res.status(404).json({ message: 'No se encontró ese ingrediente.' });
+        }
+        res.json(updatedIngredient);
     } catch (error) {
-        return res.status(404).json({ message: 'no se encontro esa tarea mostro' })
+        return res.status(500).json({ message: 'Error al actualizar el ingrediente.' });
     }
-
 }
 

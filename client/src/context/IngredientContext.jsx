@@ -42,13 +42,6 @@ export function IngredientProvider({ children }) {
       // Crear el ingrediente
       const res = await createIngredientRequest(ingredient);
       const newIngredient = res.data;
-
-      // Crear el registro de stock asociado al ingrediente
-      const newStock = await createStockForIngredient(newIngredient._id);
-
-      // Actualizar el campo de referencia al stock en el ingrediente
-      newIngredient.stock = newStock._id;
-
       // Actualizar el estado de ingredientes con el nuevo ingrediente
       setIngredients([...ingredients, newIngredient]);
     } catch (error) {

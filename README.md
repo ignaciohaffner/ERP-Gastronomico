@@ -43,10 +43,9 @@ Primero se debe clonar el repositorio y dirigirse a la carpeta Client, y luego c
   npm run dev
 ```
 
-Para el backend se debe dirigir a la carpeta src, volver a ejecutar npm install, y luego usar npm start para correr el servidor de express.
+Para el backend se debe quedar en la carpeta main, volver a ejecutar npm install, y luego usar npm start para correr el servidor de express.
 
 ```bash
-  cd src
   npm install
   npm start
 ```

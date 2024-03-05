@@ -7,6 +7,7 @@ const CreateFoodAlternative = () => {
   const { ingredients, getIngredients } = useIngredient();
   const [selectedIngredients, setSelectedIngredients] = useState({});
   const [ingredientQuantity, setIngredientQuantity] = useState({});
+  const [filteredIngredients, setFilteredIngredients] = useState([]);
 
   useEffect(() => {
     const fetchIngredients = async () => {
@@ -16,9 +17,18 @@ const CreateFoodAlternative = () => {
       await getFoods();
     };
     fetchIngredients();
-    fetchFoods()
-    console.log(foods)
+    fetchFoods();
   }, []);
+
+  useEffect(() => {
+    if (foods.length > 0) {
+      // Get the IDs of ingredients present in each food
+      const ingredientIdsInFoods = foods.flatMap((food) => food.ingredients.map((ingredient) => ingredient._id));
+      // Filter the ingredients array to only include ingredients present in the foods
+      const filteredIngredients = ingredients.filter((ingredient) => ingredientIdsInFoods.includes(ingredient._id));
+      setFilteredIngredients(filteredIngredients);
+    }
+  }, [foods, ingredients]);
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -47,7 +57,7 @@ const CreateFoodAlternative = () => {
     };
     console.log(data);
 
-    createFood(data)
+    createFood(data);
   };
 
   // State para el formulario
@@ -112,23 +122,32 @@ const CreateFoodAlternative = () => {
         </button>
       </div>
       <div>
-      <div>
-        {
-          foods.map((food)=> (
-            <div>
+        <div>
+          {foods.map((food) => (
+            <div className='border-2' key={food._id}>
               <p> {food.name} </p>
               <p> {food.price} </p>
-              {food.ingredients.map(ingredient=> (
-                <div>
-                  <p>{ingredient._id}</p>
-                  <p> {ingredient.quantity} </p>
-                </div>
-              ))
-              }
+              <h3>Ingredients:</h3>
+              <ul>
+                {food.ingredients.map((ingredient) => {
+                  const foundIngredient = filteredIngredients.find((item) => item._id === ingredient._id);
+                  return (
+                    <li key={ingredient._id}>
+                      {foundIngredient ? (
+                        <>
+                          <p>{foundIngredient.name}</p>
+                          <p>Quantity: {ingredient.quantity}</p>
+                        </>
+                      ) : (
+                        "Ingredient not found"
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-          ))
-        }
-      </div>
+          ))}
+        </div>
       </div>
     </>
   );

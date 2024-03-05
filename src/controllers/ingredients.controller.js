@@ -12,11 +12,13 @@ export const getIngredients = async (req, res) => {
 export const createIngredient = async (req, res) => {
 
     try {
-        const { name, quantity,price } = req.body
+        const { name, quantity,price, type, conversion } = req.body
         const newIngredient = new Ingredient({
             name,
             quantity,
             price,
+            type,
+            conversion
         })
         const savedIngredient = await newIngredient.save()
         res.json(savedIngredient)
